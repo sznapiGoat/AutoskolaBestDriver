@@ -8,59 +8,49 @@ import { ArrowRight, Phone } from "lucide-react";
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.12, ease: EASE },
+    transition: { duration: 0.55, delay: i * 0.1, ease: EASE },
   }),
 };
+
+const stats = [
+  { value: "AM · A1 · A2 · A · B", label: "Všechny skupiny" },
+  { value: "Osobní instruktor", label: "Stejný od začátku do konce" },
+  { value: "Vaše tempo", label: "Žádný spěch, žádný tlak" },
+];
 
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-white">
-      {/* Subtle checkerboard accent — top-right decoration */}
-      <div
-        className="pointer-events-none absolute right-0 top-0 h-64 w-64 opacity-[0.03]"
-        aria-hidden
-      >
-        <div className="grid size-full grid-cols-8 grid-rows-8">
-          {Array.from({ length: 64 }).map((_, i) => (
-            <div
-              key={i}
-              className={(Math.floor(i / 8) + (i % 8)) % 2 === 0 ? "bg-charcoal" : ""}
-            />
-          ))}
-        </div>
-      </div>
-
       <div className="mx-auto max-w-6xl px-4 pt-12 pb-0 md:px-6 md:pt-16">
         <div className="grid items-end gap-10 md:grid-cols-2">
+
           {/* Text column */}
-          <div className="pb-12 md:pb-20 space-y-8">
-            <motion.div
+          <div className="pb-12 md:pb-20 space-y-7">
+
+            <motion.p
               custom={0}
               initial="hidden"
               animate="show"
               variants={fadeUp}
-              className="inline-flex items-center gap-2 rounded-full bg-brand-muted px-3.5 py-1 text-xs font-medium text-brand"
+              className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400"
             >
-              <span className="inline-block size-1.5 rounded-full bg-brand" aria-hidden />
-              České Budějovice
-            </motion.div>
+              Autoškola · České Budějovice
+            </motion.p>
 
             <motion.h1
               custom={1}
               initial="hidden"
               animate="show"
               variants={fadeUp}
-              className="text-4xl font-semibold tracking-tight text-charcoal md:text-5xl lg:text-6xl leading-[1.1]"
+              className="font-heading font-bold leading-[1.0] tracking-[-0.03em] text-charcoal"
+              style={{ fontSize: "clamp(3rem, 7vw, 5.25rem)" }}
             >
-              Autoškola
-              <br />
-              <span className="text-brand">Best Driver</span>
-              <br />
-              CB
+              Best<br />
+              <span className="text-brand">Driver CB</span>
             </motion.h1>
 
             <motion.p
@@ -68,10 +58,9 @@ export default function HeroSection() {
               initial="hidden"
               animate="show"
               variants={fadeUp}
-              className="text-lg text-zinc-500 leading-relaxed max-w-md"
+              className="text-[1.05rem] text-zinc-500 leading-[1.8] max-w-sm"
             >
-              Jsme tady, abychom vám kvalitní výukou a výcvikem pomohli
-              k&nbsp;úspěšnému získání řidičského oprávnění.
+              Od první teorie až po zkoušku s komisařem. Provázíme vás každým krokem, ve vašem tempu, bez spěchu.
             </motion.p>
 
             <motion.div
@@ -83,68 +72,62 @@ export default function HeroSection() {
             >
               <Link
                 href="/kontakt"
-                className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
               >
-                Rezervovat kurz
-                <ArrowRight size={16} aria-hidden />
+                Zajistit si místo
+                <ArrowRight size={15} aria-hidden />
               </Link>
               <a
                 href="tel:+420775952393"
                 className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-5 py-3 text-sm font-medium text-charcoal transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
               >
-                <Phone size={16} className="text-brand" aria-hidden />
-                +420 775 952 393
+                <Phone size={15} className="text-brand" aria-hidden />
+                Zavolejte nám
               </a>
             </motion.div>
 
-            {/* Stat strip */}
             <motion.div
               custom={4}
               initial="hidden"
               animate="show"
               variants={fadeUp}
-              className="flex flex-wrap gap-6 pt-2"
+              className="flex flex-wrap gap-x-7 gap-y-3 pt-1 border-t border-zinc-100"
             >
-              {[
-                { value: "Skupiny A + B", label: "Motocykly i automobily" },
-                { value: "3 instruktoři", label: "Zkušený tým" },
-                { value: "Individuálně", label: "Přizpůsobíme se vám" },
-              ].map((s) => (
+              {stats.map((s) => (
                 <div key={s.label}>
-                  <p className="text-sm font-semibold text-charcoal">{s.value}</p>
-                  <p className="text-xs text-zinc-400">{s.label}</p>
+                  <p className="text-[0.8rem] font-semibold text-charcoal">{s.value}</p>
+                  <p className="text-[0.7rem] text-zinc-400 mt-0.5">{s.label}</p>
                 </div>
               ))}
             </motion.div>
           </div>
 
-          {/* Photo column — black Škoda with landscape */}
+          {/* Photo column */}
           <motion.div
             custom={5}
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+            transition={{ duration: 0.75, delay: 0.25, ease: EASE }}
             className="relative hidden md:block"
           >
-            {/* Card frame */}
-            <div className="relative rounded-t-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-zinc-200">
+            <div className="relative rounded-t-2xl overflow-hidden aspect-[4/5] shadow-xl shadow-zinc-200/70">
               <Image
                 src="/images/BestCb1.webp"
-                alt="Výcvikové auto autoškoly Best Driver CB – černá Škoda s výukovým znamením na střeše, panorama Českých Budějovic v pozadí"
+                alt="Výcvikový automobil autoškoly Best Driver CB s panoramatem Českých Budějovic v pozadí"
                 fill
                 className="object-cover"
                 priority
                 sizes="(max-width: 768px) 0px, 50vw"
               />
-              {/* Subtle gradient to blend into white bottom */}
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/30 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/20 to-transparent" />
             </div>
-            {/* Floating tag */}
+
             <div className="absolute -bottom-3 left-5 rounded-xl bg-white border border-zinc-200 shadow-lg px-4 py-2.5 flex items-center gap-2.5">
               <div className="size-2 rounded-full bg-green-500 animate-pulse" aria-hidden />
-              <span className="text-xs font-medium text-charcoal">Přijímáme přihlášky</span>
+              <span className="text-xs font-semibold text-charcoal">Volná místa k dispozici</span>
             </div>
           </motion.div>
+
         </div>
       </div>
 
