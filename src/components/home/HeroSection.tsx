@@ -122,10 +122,6 @@ export default function HeroSection() {
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/20 to-transparent" />
             </div>
 
-            <div className="absolute -bottom-3 left-5 rounded-xl bg-white border border-zinc-200 shadow-lg px-4 py-2.5 flex items-center gap-2.5">
-              <div className="size-2 rounded-full bg-green-500 animate-pulse" aria-hidden />
-              <span className="text-xs font-semibold text-charcoal">Volná místa k dispozici</span>
-            </div>
           </motion.div>
 
         </div>
