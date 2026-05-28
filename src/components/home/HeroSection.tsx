@@ -29,7 +29,7 @@ export default function HeroSection() {
         <div className="grid items-end gap-10 md:grid-cols-2">
 
           {/* Text column */}
-          <div className="pb-12 md:pb-20 space-y-7">
+          <div className="pb-4 md:pb-20 space-y-7">
 
             <motion.p
               custom={0}
@@ -86,8 +86,27 @@ export default function HeroSection() {
               </a>
             </motion.div>
 
+            {/* Mobile photo strip — hidden on md+ where the side column shows */}
             <motion.div
               custom={4}
+              initial="hidden"
+              animate="show"
+              variants={fadeUp}
+              className="md:hidden relative rounded-2xl overflow-hidden aspect-[16/7] shadow-md shadow-zinc-200/60"
+            >
+              <Image
+                src="/images/BestCb1.webp"
+                alt="Výcvikový automobil autoškoly Best Driver CB s panoramatem Českých Budějovic"
+                fill
+                className="object-cover object-center"
+                priority
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent" />
+            </motion.div>
+
+            <motion.div
+              custom={5}
               initial="hidden"
               animate="show"
               variants={fadeUp}
@@ -102,9 +121,8 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Photo column */}
+          {/* Desktop photo column */}
           <motion.div
-            custom={5}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.25, ease: EASE }}
@@ -117,11 +135,10 @@ export default function HeroSection() {
                 fill
                 className="object-cover"
                 priority
-                sizes="(max-width: 768px) 0px, 50vw"
+                sizes="50vw"
               />
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/20 to-transparent" />
             </div>
-
           </motion.div>
 
         </div>

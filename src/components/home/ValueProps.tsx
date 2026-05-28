@@ -1,4 +1,20 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Users, Clock, Heart, Smile, Leaf } from "lucide-react";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
 
 const props = [
   {
@@ -29,25 +45,40 @@ const props = [
 ];
 
 export default function ValueProps() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -80px 0px" });
+
   return (
-    <section className="bg-zinc-50 py-16 md:py-20 border-y border-zinc-100">
+    <section ref={ref} className="bg-zinc-50 py-16 md:py-20 border-y border-zinc-100">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
 
-        <div className="mb-10">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.45, ease: EASE }}
+          className="mb-10"
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand mb-2">
             Proč nás zvolit
           </p>
           <h2 className="font-heading text-2xl font-bold text-charcoal md:text-3xl tracking-tight">
             Co od nás dostanete
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {props.map((item, idx) => {
-            const Icon = item.icon;
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate={inView ? "show" : "hidden"}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {props.map((prop, idx) => {
+            const Icon = prop.icon;
             return (
-              <div
+              <motion.div
                 key={idx}
+                variants={item}
                 className="flex gap-4 rounded-xl bg-white border border-zinc-100 p-5"
               >
                 <div className="mt-0.5 shrink-0 inline-flex size-9 items-center justify-center rounded-lg bg-brand-muted">
@@ -55,16 +86,19 @@ export default function ValueProps() {
                 </div>
                 <div>
                   <h3 className="font-heading text-[0.9rem] font-bold text-charcoal mb-1.5 tracking-tight">
-                    {item.title}
+                    {prop.title}
                   </h3>
-                  <p className="text-sm text-zinc-500 leading-[1.7]">{item.body}</p>
+                  <p className="text-sm text-zinc-500 leading-[1.7]">{prop.body}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
 
-          {/* CTA card — 6th slot on large screens */}
-          <div className="hidden lg:flex flex-col justify-center rounded-xl bg-brand p-5 text-white">
+          {/* CTA tile — 6th slot on large screens */}
+          <motion.div
+            variants={item}
+            className="hidden lg:flex flex-col justify-center rounded-xl bg-brand p-5 text-white"
+          >
             <p className="text-sm font-medium text-white/70 mb-1">Máte otázky?</p>
             <p className="font-heading text-2xl font-bold tracking-tight mb-4 leading-tight">
               Zavolejte nám
@@ -75,8 +109,8 @@ export default function ValueProps() {
             >
               +420 775 952 393
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       </div>
     </section>
