@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { InstagramIcon, FacebookIcon } from "@/components/SocialIcons";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -13,6 +14,19 @@ const links = [
   { label: "Ceník", href: "/cenik" },
   { label: "O nás", href: "/o-nas" },
   { label: "Kontakt", href: "/kontakt" },
+];
+
+const socials = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/as_best_driver/",
+    Icon: InstagramIcon,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=100093295539910",
+    Icon: FacebookIcon,
+  },
 ];
 
 export default function Navbar() {
@@ -49,11 +63,7 @@ export default function Navbar() {
           className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded"
           aria-label="Autoškola Best Driver CB – domů"
         >
-          {/* Checkerboard accent (logo hint) */}
-          <div
-            className="size-7 rounded-sm overflow-hidden shrink-0"
-            aria-hidden="true"
-          >
+          <div className="size-7 rounded-sm overflow-hidden shrink-0" aria-hidden>
             <div className="grid grid-cols-2 grid-rows-2 size-full">
               <div className="bg-charcoal" />
               <div className="bg-white border border-zinc-300" />
@@ -97,8 +107,21 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center">
+        {/* Desktop: socials + CTA */}
+        <div className="hidden md:flex items-center gap-2">
+          {socials.map(({ label, href, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="p-1.5 text-zinc-400 hover:text-charcoal transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+            >
+              <Icon className="size-[18px]" />
+            </a>
+          ))}
+          <div className="w-px h-5 bg-zinc-200 mx-1" aria-hidden />
           <Link
             href="/kontakt"
             className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
@@ -144,13 +167,28 @@ export default function Navbar() {
               );
             })}
           </ul>
-          <div className="mt-4 pt-4 border-t border-zinc-100">
+          <div className="mt-4 pt-4 border-t border-zinc-100 flex flex-col gap-3">
             <Link
               href="/kontakt"
               className="block w-full text-center rounded-lg bg-brand px-4 py-3 text-base font-medium text-white transition-colors hover:bg-brand-dark"
             >
               Rezervovat kurz
             </Link>
+            <div className="flex justify-center gap-4">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex items-center gap-1.5 text-sm text-zinc-500 hover:text-brand transition-colors"
+                >
+                  <Icon className="size-4" />
+                  {label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}

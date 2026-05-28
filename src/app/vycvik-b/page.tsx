@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Car,
   CheckCircle2,
@@ -189,15 +190,15 @@ export default function VycvikBPage() {
                 Vozový park
               </p>
               <h2 className="text-2xl font-semibold text-charcoal tracking-tight md:text-3xl mb-4">
-                Moderní Škoda Fabia
+                Náš vozový park
               </h2>
               <p className="text-zinc-500 leading-relaxed mb-6">
-                Výcvik probíhá na moderní černé Škodě Fabii — spolehlivém a bezpečném
-                voze ideálním pro výuku. Ovládání je intuitivní a přátelské pro začátečníky
-                i pokročilé studenty.
+                Výcvik probíhá na Škodě Fabii — spolehlivém a bezpečném voze ideálním
+                pro výuku. Ovládání je intuitivní, kabina prostorná a přátelská jak
+                pro začátečníky, tak pro pokročilé studenty.
               </p>
               <ul className="space-y-2.5">
-                {["Bezpečnostní systémy ESP a ABS", "Pohodlná kabina pro nerušenou výuku", "Dual kontrola pro instruktora"].map(
+                {["Bezpečnostní systémy ESP a ABS", "Pohodlná kabina pro nerušenou výuku", "Dual kontrola pro instruktora", "Výcvikové označení schválené MDI"].map(
                   (f) => (
                     <li key={f} className="flex items-center gap-2.5 text-sm text-zinc-600">
                       <CheckCircle2 size={15} className="text-brand shrink-0" aria-hidden />
@@ -208,11 +209,25 @@ export default function VycvikBPage() {
               </ul>
             </div>
 
-            {/* Visual placeholder */}
-            <div className="rounded-xl bg-zinc-100 aspect-[4/3] flex items-center justify-center border border-zinc-200">
-              <div className="text-center space-y-2">
-                <Car size={40} className="mx-auto text-zinc-300" aria-hidden />
-                <p className="text-xs text-zinc-400">Škoda Fabia</p>
+            {/* Fleet photos */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="relative rounded-xl overflow-hidden aspect-[3/4] col-span-2 sm:col-span-1">
+                <Image
+                  src="/images/BestCb1.webp"
+                  alt="Výcvikový automobil autoškoly Best Driver CB – černá Škoda s označením autoškoly a panoramatem Českých Budějovic"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 25vw"
+                />
+              </div>
+              <div className="relative rounded-xl overflow-hidden aspect-[3/4] col-span-2 sm:col-span-1">
+                <Image
+                  src="/images/BestCb2.webp"
+                  alt="Výcvikový automobil autoškoly Best Driver CB – modrá Škoda Fabia v Českých Budějovicích"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 25vw"
+                />
               </div>
             </div>
           </div>

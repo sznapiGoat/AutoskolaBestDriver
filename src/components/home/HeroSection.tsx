@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -20,7 +21,7 @@ export default function HeroSection() {
     <section className="relative overflow-hidden bg-white">
       {/* Subtle checkerboard accent — top-right decoration */}
       <div
-        className="pointer-events-none absolute right-0 top-0 h-64 w-64 opacity-[0.035]"
+        className="pointer-events-none absolute right-0 top-0 h-64 w-64 opacity-[0.03]"
         aria-hidden
       >
         <div className="grid size-full grid-cols-8 grid-rows-8">
@@ -33,10 +34,10 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 pt-16 pb-20 md:px-6 md:pt-24 md:pb-28">
-        <div className="grid items-center gap-12 md:grid-cols-2">
+      <div className="mx-auto max-w-6xl px-4 pt-12 pb-0 md:px-6 md:pt-16">
+        <div className="grid items-end gap-10 md:grid-cols-2">
           {/* Text column */}
-          <div className="space-y-8">
+          <div className="pb-12 md:pb-20 space-y-8">
             <motion.div
               custom={0}
               initial="hidden"
@@ -95,38 +96,59 @@ export default function HeroSection() {
                 +420 775 952 393
               </a>
             </motion.div>
+
+            {/* Stat strip */}
+            <motion.div
+              custom={4}
+              initial="hidden"
+              animate="show"
+              variants={fadeUp}
+              className="flex flex-wrap gap-6 pt-2"
+            >
+              {[
+                { value: "Skupiny A + B", label: "Motocykly i automobily" },
+                { value: "3 instruktoři", label: "Zkušený tým" },
+                { value: "Individuálně", label: "Přizpůsobíme se vám" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <p className="text-sm font-semibold text-charcoal">{s.value}</p>
+                  <p className="text-xs text-zinc-400">{s.label}</p>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Stats / visual column */}
+          {/* Photo column — black Škoda with landscape */}
           <motion.div
-            custom={4}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="grid grid-cols-2 gap-4"
+            custom={5}
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+            className="relative hidden md:block"
           >
-            {[
-              { value: "A, B", label: "Skupiny řidičských průkazů" },
-              { value: "3×", label: "Instruktoři s dlouhou praxí" },
-              { value: "100%", label: "Individuální přístup" },
-              { value: "CB", label: "Centrum Českých Budějovic" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-zinc-100 bg-zinc-50 p-5 space-y-1"
-              >
-                <p className="text-2xl font-semibold text-charcoal tracking-tight">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-zinc-400 leading-snug">{stat.label}</p>
-              </div>
-            ))}
+            {/* Card frame */}
+            <div className="relative rounded-t-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-zinc-200">
+              <Image
+                src="/images/BestCb1.webp"
+                alt="Výcvikové auto autoškoly Best Driver CB – černá Škoda s výukovým znamením na střeše, panorama Českých Budějovic v pozadí"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 0px, 50vw"
+              />
+              {/* Subtle gradient to blend into white bottom */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/30 to-transparent" />
+            </div>
+            {/* Floating tag */}
+            <div className="absolute -bottom-3 left-5 rounded-xl bg-white border border-zinc-200 shadow-lg px-4 py-2.5 flex items-center gap-2.5">
+              <div className="size-2 rounded-full bg-green-500 animate-pulse" aria-hidden />
+              <span className="text-xs font-medium text-charcoal">Přijímáme přihlášky</span>
+            </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Bottom divider */}
-      <div className="h-px bg-zinc-100 mx-auto max-w-6xl" aria-hidden />
+      <div className="h-px bg-zinc-100 mx-auto max-w-6xl mt-8 md:mt-0" aria-hidden />
     </section>
   );
 }

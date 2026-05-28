@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Bike, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -171,6 +172,53 @@ export default function MotocyklyPage() {
                 <p className="text-lg font-semibold text-charcoal">{path.price}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Fleet photo gallery */}
+      <section className="bg-white py-16 md:py-20 border-b border-zinc-100">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="mb-8">
+            <p className="text-xs font-semibold uppercase tracking-widest text-brand mb-2">
+              Naše motorky
+            </p>
+            <h2 className="text-2xl font-semibold text-charcoal tracking-tight md:text-3xl">
+              Vozový park
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* BestCb3 – two blue bikes */}
+            <div className="relative rounded-xl overflow-hidden aspect-square sm:aspect-[3/4]">
+              <Image
+                src="/images/BestCb3.webp"
+                alt="Dva modré motocykly na cvičišti autoškoly Best Driver CB"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </div>
+            {/* BestCb4 – Suzuki + blue in courtyard */}
+            <div className="relative rounded-xl overflow-hidden aspect-square sm:aspect-[3/4]">
+              <Image
+                src="/images/BestCb4.webp"
+                alt="Suzuki a modrý motocykl na parkovišti autoškoly Best Driver CB"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </div>
+            {/* BestCb5 – Yamaha on forest road */}
+            <div className="relative rounded-xl overflow-hidden aspect-square sm:aspect-[3/4]">
+              <Image
+                src="/images/BestCb5.webp"
+                alt="Žlutý Yamaha motocykl na lesní silnici – praktická jízda v kurzu skupiny A"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </div>
           </div>
         </div>
       </section>
