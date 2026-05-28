@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import TrackGrid from "@/components/home/TrackGrid";
+import FleetStrip from "@/components/home/FleetStrip";
 import ValueProps from "@/components/home/ValueProps";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -14,6 +15,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TrackGrid />
+      <FleetStrip />
       <ValueProps />
 
       {/* Bottom CTA banner */}

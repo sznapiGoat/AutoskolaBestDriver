@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import {
   Bike,
@@ -94,12 +95,25 @@ export default function TrackGrid() {
               <motion.div key={track.href} variants={item}>
                 <Link
                   href={track.href}
-                  className={`group relative flex flex-col gap-5 rounded-xl p-6 border h-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
+                  className={`group relative flex flex-col gap-5 rounded-xl p-6 border h-full overflow-hidden transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
                     track.accent
                       ? "bg-brand border-brand hover:bg-brand-dark"
                       : "bg-white border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50"
                   }`}
                 >
+                  {/* Subtle photo wash — car card only */}
+                  {!track.accent && (
+                    <div className="pointer-events-none absolute inset-0" aria-hidden>
+                      <Image
+                        src="/images/BestCb2.webp"
+                        alt=""
+                        fill
+                        className="object-cover opacity-[0.06]"
+                        sizes="50vw"
+                      />
+                    </div>
+                  )}
+
                   <div
                     className={`inline-flex items-center justify-center size-10 rounded-lg ${
                       track.accent ? "bg-white/20" : "bg-brand-muted"
